@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Rock, Paper, and Scissors Game</title>
+  </head>
+  <body>
+    <h1>POKEMON BATTLE</h1>
+    <p>PRESS "c" for Charmander, Press "b" for Bulbasaur, Press "s" for Squirtle</p>
+    <hr>
+    <div class="player">
+    </div>
+    <p></p>
+    <div class="computer">
+
+    </div>
+    <p></p>
+    <div class="battle-text">
+
+    </div>
+    <p></p>
+    <div class="score">
+    </div>
+  </body>
+  <script type="text/javascript">
+    // Weapon and Random Variables
+    var weapon = ["Charmander and FIRE", "Squirtle and WATER", "Bulbasaur and PLANT"];
+    var randomNumber, computerWeapon;
+    var playerWins = 0;
+    var playerLoss = 0;
+    var playerTies = 0;
+
+    // Grabbing elements
+    var playerElement = document.querySelector('.player');
+    var computerElement = document.querySelector('.computer');
+    var scoreElement = document.querySelector('.score');
+    var battleElement = document.querySelector('.battle-text');
+
+    // rock-paper-scissor images
+    var charmander =
+    "<br> <img src='http://vignette1.wikia.nocookie.net/pokemon/images/9/96/004Charmander_OS_anime.png/revision/latest?cb=20140603214902' width='200px' height='200px'>";
+    var bulbasaur =
+    "<br> <img src='http://static.pokemonpets.com/images/monsters-images-800-800/1-Bulbasaur.png' width='200px' height='200px'>";
+    var squirtle =
+    "<br> <img src='https://2.bp.blogspot.com/-atzUuc_vK_Y/VuYP0hNemgI/AAAAAAAAF8s/3G9YSKC439k3x14QbuWOcvXJVEMxaFZbA/s1600/Squirtle.PNG' width='200px' height='200px'>";
+
+    var weaponImages = [charmander, squirtle, bulbasaur];
+
+    function lose(){
+      battleElement.innerHTML = "It was super ineffective! Computer Wins! Player Loses!";
+      playerLoss++;
+    }
+
+    function win(){
+      battleElement.innerHTML = "It was super effective! Player Wins!";
+      playerWins++;
+    }
+
+    function tie(){
+      battleElement.innerHTML = "It was ineffective! TIE!";
+      playerTies++;
+    }
+
+    // Triggers event when key is pressed
+    document.onkeyup = function(event){
+
+      // Generates computer's weapon
+      randomNumber = Math.floor(Math.random()*weapon.length);
+      computerWeapon = weapon[randomNumber];
+      console.log(randomNumber);
+      var key = event.key.toLowerCase();
+
+      // If-ELSE OPTION
+      // if (key === "r"){
+      //   playerElement.innerHTML = "Player used Rock attack!";
+      //   if (computerWeapon === "Scissor"){
+      //     win();
+      //   }
+      //   else if (computerWeapon === "Rock"){
+      //     tie();
+      //   }
+      //   else{
+      //     lose();
+      //   }
+      // }
+      //
+      // // If player presses Scissor
+      // else if (key === "s"){
+      //   playerElement.innerHTML = "Player used Scissor attack!";
+      //   if (computerWeapon === "Scissor"){
+      //     tie();
+      //   }
+      //   else if (computerWeapon === "Rock"){
+      //     win();
+      //   }
+      //   else{
+      //     lose();
+      //   }
+      // }
+      //
+      // // If player presses Paper
+      // else if (key === "p"){
+      //   playerElement.innerHTML = "Player used Paper attack!";
+      //   if (computerWeapon === "Scissor"){
+      //     lose();
+      //   }
+      //   else if (computerWeapon === "Rock"){
+      //     win();
+      //   }
+      //   else{
+      //     tie();
+      //   }
+      // }
+
+
+      // SWITCH-CASE OPTION
+      if (key === 'c' || key === 's' || key === 'b'){
+        switch (key) {
+          case 'c':
+            playerElement.innerHTML = "Player used Chamander and FIRE attack!" + weaponImages[0];
+            if (randomNumber === 0) tie();
+            else if (randomNumber === 1) lose();
+            else win();
+            break;
+          case "s":
+            playerElement.innerHTML = "Player used Squirtle and WATER attack!" + weaponImages[1];
+            if(randomNumber===0)win();
+            else if(randomNumber===1)tie();
+            else lose();
+            break;
+          case "b":
+            playerElement.innerHTML = "Player used Bulbasaur and PLANT attack!" + weaponImages[2];
+            if(randomNumber===0)lose();
+            else if(randomNumber===1)win();
+            else tie();
+            break;
+          default:
+            break;
+        }
+        computerElement.innerHTML = "Computer used " + computerWeapon + " attack!" + weaponImages[randomNumber] ;
+
+        scoreElement.innerHTML = "Wins: " + playerWins + "<br>Loss: " + playerLoss + "<br>Ties: " + playerTies;
+
+      };
+    }
+
+  </script>
+</html>
